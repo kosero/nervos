@@ -1,8 +1,6 @@
 #ifndef NERV_H
 #define NERV_H
 
-#include <stddef.h>
-
 #define BUFFER_HEIGHT 25
 #define BUFFER_WIDTH 80
 
@@ -35,16 +33,15 @@ enum Color {
 };
 
 typedef struct {
-    size_t column_position;
+    unsigned int column_position;
     unsigned char color_code;
 } Writer;
 
 extern volatile Buffer *buffer;
 
-void clear_row(size_t row);
+void clear_row(unsigned int row);
 void new_line(void);
 void write_byte(unsigned char byte);
 void write_string(const char* str);
 
 #endif // NERV_H
-
