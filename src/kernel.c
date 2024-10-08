@@ -8,9 +8,10 @@ asm(".section .multiboot\n\t"
 
 void kmain()
 {
-    print_str("NERV Operating System.");
+    write_string("NERV Operating System.\n");
 
     while (1) {
+         
     }
 }
 
