@@ -4,18 +4,18 @@ volatile Buffer *buffer = (volatile Buffer *)0xB8000;
 
 Writer writer = { 0, (Black << 4) | LightRed };
 
-void clear_row(size_t row)
+void clear_row(unsigned int row)
 {
     ScreenChar blank = { ' ', writer.color_code };
-    for (size_t col = 0; col < BUFFER_WIDTH; col++) {
+    for (unsigned int col = 0; col < BUFFER_WIDTH; col++) {
         buffer->chars[row][col] = blank;
     }
 }
 
 void new_line()
 {
-    for (size_t row = 1; row < BUFFER_HEIGHT; row++) {
-        for (size_t col = 0; col < BUFFER_WIDTH; col++) {
+    for (unsigned int row = 1; row < BUFFER_HEIGHT; row++) {
+        for (unsigned int col = 0; col < BUFFER_WIDTH; col++) {
             buffer->chars[row - 1][col] = buffer->chars[row][col];
         }
     }
@@ -23,7 +23,7 @@ void new_line()
     writer.column_position = 0;
 }
 
-void write_byte(unsigned char byte) 
+void write_byte(unsigned char byte)
 {
     if (byte == '\n') {
         new_line();
@@ -34,12 +34,12 @@ void write_byte(unsigned char byte)
         new_line();
     }
 
-    size_t row = BUFFER_HEIGHT - 1;
-    size_t col = writer.column_position;
+    unsigned int row = BUFFER_HEIGHT - 1;
+    unsigned int col = writer.column_position;
 
     buffer->chars[row][col].ascii_character = byte;
     buffer->chars[row][col].color_code = writer.color_code;
-    
+
     writer.column_position++;
 }
 
@@ -56,4 +56,3 @@ void write_string(const char* str)
         str++;
     }
 }
-
