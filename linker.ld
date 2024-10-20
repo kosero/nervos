@@ -1,4 +1,4 @@
-ENTRY(start)
+ENTRY(kmain)
 SECTIONS
 {
     . = 0x7C00;

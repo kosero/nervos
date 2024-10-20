@@ -1,8 +1,11 @@
-#ifndef NERV_H
-#define NERV_H
+#ifndef NVIO_H
+#define NVIO_H
 
 #define BUFFER_HEIGHT 25
 #define BUFFER_WIDTH 80
+
+#define PORT_OUTPUT 0x3F8
+#define PORT_INPUT  0x60
 
 typedef struct {
     unsigned char ascii_character;
@@ -39,9 +42,13 @@ typedef struct {
 
 extern volatile Buffer *buffer;
 
+void outb(unsigned short port, unsigned char value);
+unsigned char inb(unsigned short port);
+
 void clear_row(unsigned int row);
 void new_line(void);
 void write_byte(unsigned char byte);
 void write_string(const char* str);
 
-#endif // NERV_H
+#endif // NVIO_H
+
